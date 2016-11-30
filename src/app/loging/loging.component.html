@@ -1,0 +1,31 @@
+<div class="row">
+  <h2>Se connecter</h2>
+    <div class="row">
+    <div class="columns large-offset-2 large-8 medium-offset-2 medium-8 small-12">
+      <div class="callout">
+        <h3>Connexion</h3>
+        <form (ngSubmit)="log()">
+          <div class="row">
+            <div class="medium-12 columns">
+              <label>Nom d'utilisateur
+                <input type="text" [(ngModel)]="login" name="login">
+              </label>
+            </div>
+            <div class="medium-12 columns">
+              <label>Mot de passe
+                <input type="password" [(ngModel)]="password" name="password">
+              </label>
+            </div>
+            <div class="medium-12 columns">
+              <input type="checkbox" [(ngModel)]="stayConnected" name="stayConnected">
+              <label>Rester connecté</label>
+            </div>
+            <div class="medium-12 columns">
+              <button type="submit" class="button">connexion</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
