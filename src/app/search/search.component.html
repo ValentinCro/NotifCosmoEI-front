@@ -1,0 +1,47 @@
+<div class="row">
+  <h3>Recherche</h3>
+  <div class="columns large-12 medium-12 small-12">
+    <div class="input-group">
+      <input class="input-group-field" type="text">
+      <div class="input-group-button">
+        <button class="button"><i class="fi-magnifying-glass"></i></button>
+      </div>
+    </div>
+    <div class="callout" *ngIf="advancedSearch == true">
+      <fieldset>
+        <legend>Critére de recherche</legend>
+        <input type="radio" name="criteria" [(ngModel)]="criteria" value="product" id="product" required><label for="product">Produit</label>
+        <input type="radio" name="criteria" [(ngModel)]="criteria" value="ingredient" id="ingredient"><label for="ingredient">Ingrédient</label>
+        <input type="radio" name="criteria" [(ngModel)]="criteria" value="symptome" id="symptome"><label for="symptome">Symptome</label>
+      </fieldset>
+      <p class="text-right">
+        <small><a (click)="hideAdvancedSearch()">fermer avancée x</a></small>
+      </p>
+    </div>
+    <small><a *ngIf="advancedSearch == false" (click)="displayAdvancedSearch()">recherche avancée</a></small>
+  </div>
+  <div class="columns large-12 medium-12 small-12">
+    <div class="callout">
+      <table class="hover hide-for-small-only">
+        <thead>
+          <tr>
+            <th width="50"></th>
+            <th>Produit</th>
+            <th>Ingrédients</th>
+            <th>Symptomes</th>
+            <th width="100"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><span class="badge">0</span></td>
+            <td>teinture capillaire</td>
+            <td>ammoniaque</td>
+            <td>irritation</td>
+            <td><span class="label">Nouveau !</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

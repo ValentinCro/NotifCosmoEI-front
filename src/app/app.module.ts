@@ -11,6 +11,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { RegisterComponent } from './register/register.component';
 import { LogingComponent } from './loging/loging.component';
 import { CreateAEComponent } from './create-ae/create-ae.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CreateAEComponent } from './create-ae/create-ae.component';
     LayoutComponent,
     RegisterComponent,
     LogingComponent,
-    CreateAEComponent
+    CreateAEComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
