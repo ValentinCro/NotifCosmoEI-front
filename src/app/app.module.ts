@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { RegisterComponent } from './register/register.component';
 import { LogingComponent } from './loging/loging.component';
+import { CreateAEComponent } from './create-ae/create-ae.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LogingComponent } from './loging/loging.component';
     HomeComponent,
     LayoutComponent,
     RegisterComponent,
-    LogingComponent
+    LogingComponent,
+    CreateAEComponent
   ],
   imports: [
     BrowserModule,

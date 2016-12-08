@@ -1,0 +1,103 @@
+<div class="row">
+  <h2>Ajouter un effet indésirable</h2>
+  <div class="row">
+    <div class="columns large-offset-2 large-8 medium-offset-2 medium-8 small-12">
+      <div class="callout">
+        <h3>Produit</h3>
+        <div class="row">
+          <div class="medium-12 columns">
+            <div class="medium-12 columns">
+              <label>Le nom du produit
+                <input type="text" [(ngModel)]="productName" (ngModelChange)="getProducts()" name="productName">
+              </label>
+            </div>
+            <div class="medium-12 columns">
+              <p *ngIf="productName.length == 0" class="text-center">
+                <small>veuillez renseigner un nom de produit</small>
+              </p>
+              <p *ngIf="productName.length > 0 && loadProducts == true" class="text-center">
+                <small>veuillez patienter...</small>
+              </p>
+              <p *ngIf="productName.length > 0 && loadProducts == false" class="text-center">
+                <small>Aucun produit trouvé</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="productName.length > 0">
+    <div class="columns large-offset-2 large-8 medium-offset-2 medium-8 small-12">
+      <div class="callout">
+        <h3>Ingrédients</h3>
+        <div class="row">
+          <div class="columns medium-offset-11 medium-1">
+            <button type="button" class="button" (click)="addIngredient()">+</button>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let ingredient of ingredients">
+            <div class="input-group">
+              <span class="input-group-label">Le nom de l'ingrédient</span>
+                <input class="input-group-field" type="text" [(ngModel)]="ingredient.ingredientName">
+                <div class="input-group-button">
+                  <input type="button" class="button" (click)="removeIngredient(ingredient)" value="x">
+                </div>
+            </div>
+          </div>
+          <div class="medium-12 columns" *ngIf="ingredients.length == 0">
+            <p *ngIf="productName.length == 0" class="text-center">
+              <small>veuillez renseigner un nom de produit</small>
+            </p>
+            <p *ngIf="productName.length > 0 && loadIngredients == false" class="text-center">
+              <small>Aucun ingrédient n'a été trouvé pour ce produit</small>
+            </p>
+            <p *ngIf="productName.length > 0 && loadIngredients == true" class="text-center">
+              <small>veuillez patienter...</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="productName.length > 0">
+    <div class="columns large-offset-2 large-8 medium-offset-2 medium-8 small-12">
+      <div class="callout">
+        <h3>Symptomes</h3>
+        <div class="row">
+          <div class="columns medium-offset-11 medium-1">
+            <button type="button" class="button" (click)="addSymptome()">+</button>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let symptome of symptomes">
+            <div class="input-group">
+              <span class="input-group-label">Le nom du symptome</span>
+              <input class="input-group-field" type="text" [(ngModel)]="symptome.symptomeName">
+              <div class="input-group-button">
+                <input type="button" class="button" (click)="removeSymptome(symptome)" value="x">
+              </div>
+            </div>
+          </div>
+          <div class="medium-12 columns" *ngIf="symptomes.length == 0">
+            <p *ngIf="loadSymptomes == true" class="text-center">
+              <small>veuillez patienter...</small>
+            </p>
+            <p *ngIf="productName.length == 0 && loadSymptomes == false" class="text-center">
+              <small>veuillez renseigner un nom de produit</small>
+            </p>
+            <p *ngIf="productName.length > 0 && loadSymptomes == false" class="text-center">
+              <small>Aucun symptome n'a été trouvé pour ce produit</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns medium-12" *ngIf="productName.length > 0 && symptomes.length > 0 ingredients.length > 0">
+      <button class="button float-right">Valider</button>
+    </div>
+  </div>
+</div>

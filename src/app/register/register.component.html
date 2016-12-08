@@ -1,10 +1,22 @@
 <div class="row">
   <h2>S'inscrire</h2>
+  <div class="row" *ngIf="password != password2 || login.length < 6 || password.length < 6
+                          || password2.length < 6">
+    <div class="columns large-12 medium-12 small-12">
+      <div class="alert callout small">
+        <h5>Erreur</h5>
+        <p *ngIf="login.length < 6">Le nom d'utilisateur doit faire minimum 6 caractère</p>
+        <p *ngIf="password != password2">Les mots de passe doivent &ecirc;tre identique</p>
+        <p *ngIf="password.length < 6 || password2.length < 6">Le mot de passe doit faire minimum 6 caractère</p>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="columns large-offset-2 large-8 medium-offset-2 medium-8 small-12">
       <div class="callout">
         <h3>Inscription</h3>
-        <form (ngSubmit)="register()">
+        <form (ngSubmit)="password == password2 && login.length >= 6 && password.length >= 6
+                          && password2.length >= 6 && register()">
           <div class="row">
             <div class="medium-12 columns">
               <label>Nom d'utilisateur

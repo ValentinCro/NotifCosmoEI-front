@@ -17,6 +17,9 @@ export class RegisterComponent implements OnInit {
 
   //fonction d'inscription
   register() {
-
+    if (this.password == this.password2 && this.password.length >= 6 && this.password2.length >= 6
+        && this.login.length >= 6) {
+      //send donnée
+    }
   }
 }
