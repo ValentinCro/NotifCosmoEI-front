@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   lastname: string = "";
   password: string = "";
   password2: string = "";
+  mail: string = "";
   http: any;
   constructor(private h: Http) {
     this.http = h;
@@ -25,9 +26,11 @@ export class RegisterComponent implements OnInit {
   //fonction d'inscription
   register() {
     if (this.password == this.password2 && this.password.length >= 6 && this.password2.length >= 6
-        && this.login.length >= 6 && this.firstname.length > 0 && this.lastname.length > 0) {
+        && this.login.length >= 6 && this.firstname.length > 0 && this.lastname.length > 0
+        && this.mail.length >= 6) {
 
       let user = {
+        mail: this.mail,
         username: this.login,
         firstname: this.firstname,
         lastname: this.lastname,
@@ -35,7 +38,7 @@ export class RegisterComponent implements OnInit {
       }
 
       //send donnée
-      this.http.post("localhost:8080/signup", user)
+      this.http.post("http://localhost/user/signup", user)
       // extract json body
         .map(res => res.json())
         .subscribe(races => {

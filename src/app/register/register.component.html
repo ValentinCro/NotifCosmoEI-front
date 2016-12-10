@@ -17,9 +17,13 @@
     <div class="columns large-offset-2 large-8 medium-offset-2 medium-8 small-12">
       <div class="callout">
         <h3>Inscription</h3>
-        <form (ngSubmit)="register() : password == password2 && login.length >= 6 && password.length >= 6
-                          && password2.length >= 6 && lastname.length > 0 && firsttname.length > 0">
+        <form >
           <div class="row">
+            <div class="medium-12 columns">
+              <label>Adresse mail
+                <input type="email" [(ngModel)]="mail" name="mail">
+              </label>
+            </div>
             <div class="medium-12 columns">
               <label>Nom d'utilisateur
                 <input type="text" [(ngModel)]="login" name="login">
@@ -27,12 +31,12 @@
             </div>
             <div class="medium-12 columns">
               <label>Nom
-                <input type="text" [(ngModel)]="lastname" name="login">
+                <input type="text" [(ngModel)]="lastname" name="lastname">
               </label>
             </div>
             <div class="medium-12 columns">
             <label>Prénom
-                <input type="text" [(ngModel)]="firstname" name="login">
+                <input type="text" [(ngModel)]="firstname" name="firstname">
               </label>
             </div>
             <div class="medium-12 columns">
@@ -46,7 +50,11 @@
               </label>
             </div>
             <div class="medium-12 columns">
-              <button type="submit" class="button">s'inscrire</button>
+              <button type="button" class="button" (click)="password == password2 && login.length >= 6
+                          && password.length >= 6 && password2.length >= 6 && lastname.length > 0
+                          && firstname.length > 0 && register()">
+                s'inscrire
+              </button>
             </div>
           </div>
         </form>
