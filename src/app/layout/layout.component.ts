@@ -13,6 +13,6 @@ export class LayoutComponent implements OnInit {
   }
 
   isConnected() {
-    return true;
+    return false;
   }
 }
