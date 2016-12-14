@@ -21,7 +21,7 @@
     </ul>
     <ul class="menu" *ngIf="isConnected()">
       <li><a href="" routerLink="/search" class="button"><i class="fi-magnifying-glass"></i></a></li>
-      <li><a href="" routerLink="" class="button"><i class="fi-power"></i></a></li>
+      <li><a href="" routerLink="" class="button" (click)="disconnect()"><i class="fi-power"></i></a></li>
     </ul>
   </div>
 </div>

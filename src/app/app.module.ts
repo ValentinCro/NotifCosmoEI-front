@@ -13,6 +13,8 @@ import { LogingComponent } from './loging/loging.component';
 import { CreateAEComponent } from './create-ae/create-ae.component';
 import { SearchComponent } from './search/search.component';
 
+import { HttpServiceService } from './http-service.service'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,9 @@ import { SearchComponent } from './search/search.component';
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [],
+  providers: [
+    HttpServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

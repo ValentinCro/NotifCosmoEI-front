@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {isUndefined} from "util";
 
 @Component({
   selector: 'app-layout',
@@ -13,6 +14,10 @@ export class LayoutComponent implements OnInit {
   }
 
   isConnected() {
-    return false;
+    return localStorage.getItem("token") != undefined;
+  }
+
+  disconnect() {
+    localStorage.removeItem("token");
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/map';
-import {Http} from "@angular/http";
+import {Router} from "@angular/router"
+import { HttpServiceService } from '../http-service.service'
 
 @Component({
   selector: 'app-register',
@@ -15,9 +16,11 @@ export class RegisterComponent implements OnInit {
   password: string = "";
   password2: string = "";
   mail: string = "";
-  http: any;
-  constructor(private h: Http) {
-    this.http = h;
+
+  constructor(private http: HttpServiceService, private router: Router) {
+    if (localStorage.getItem('token') != undefined) {
+      this.router.navigate([""]);
+    }
   }
 
   ngOnInit() {
@@ -30,20 +33,22 @@ export class RegisterComponent implements OnInit {
         && this.mail.length >= 6) {
 
       let user = {
-        mail: this.mail,
-        username: this.login,
-        firstname: this.firstname,
-        lastname: this.lastname,
-        password: this.password
-      }
+        "userName" : this.login,
+        "email" : this.mail,
+        "firstName" : this.firstname,
+        "lastName" : this.lastname,
+        "password" : this.password,
+        "role" : "USER"
+      };
 
       //send donnée
-      this.http.post("http://localhost/user/signup", user)
+
+      this.http.signup(user)
       // extract json body
         .map(res => res.json())
-        .subscribe(races => {
-          // store the array of the races in the component
-          console.log(races);
+        .subscribe(res => {
+          localStorage.setItem("token", res.token);
+          this.router.navigate([""]);
         });
     }
   }

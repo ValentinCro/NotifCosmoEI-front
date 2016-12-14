@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Http} from "@angular/http";
+import { HttpServiceService } from '../http-service.service'
 
 @Component({
   selector: 'app-create-ae',
@@ -18,7 +20,7 @@ export class CreateAEComponent implements OnInit {
   ingredientID: number = 0;
   symptomeID: number = 0;
 
-  constructor() { }
+  constructor(private http: HttpServiceService) { }
 
   ngOnInit() {
 
@@ -59,6 +61,27 @@ export class CreateAEComponent implements OnInit {
       if (symptome.idSymptome != item.idSymptome) {
         this.symptomes.push(item);
       }
+    }
+  }
+
+  save() {
+    let ingredientsToSave = [];
+    for (let ingredient of this.ingredients) {
+      ingredientsToSave.push(ingredient.ingredientName);
+    }
+    let idIngredients = [];
+
+    for (let ingredient of ingredientsToSave) {
+      let data = {
+        "name": ingredient
+      };
+      this.http.addIngredients(data)
+      // extract json body
+        .map(res => res.json())
+        .subscribe(res => {
+          console.log(res);
+          idIngredients.push();
+        });
     }
   }
 }

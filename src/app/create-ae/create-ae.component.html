@@ -97,7 +97,7 @@
   </div>
   <div class="row">
     <div class="columns medium-12" *ngIf="productName.length > 0 && symptomes.length > 0 && ingredients.length > 0">
-      <button class="button float-right">Valider</button>
+      <button class="button float-right" (click)="save()">Valider</button>
     </div>
   </div>
 </div>
