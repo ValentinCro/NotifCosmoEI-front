@@ -11,20 +11,39 @@ export class HttpServiceService {
   generateHeader() {
     let token = localStorage.getItem('token');
     let authHeader = new Headers();
-    let options = new RequestOptions({headers: authHeader});
     if(token != undefined) {
-      authHeader.set('Authorization', 'Bearer ' + token);
+      authHeader = new Headers({'Authorization' : 'Bearer ' + token});
     }
-    console.log(options);
-    return authHeader;
+
+    return new RequestOptions({headers: authHeader});
+  }
+
+  searchProducts(arg) {
+    return this.http.get(this.baseUrl + '/products/search?value=' + arg);
+  }
+
+  searchIngredients(arg) {
+    return this.http.get(this.baseUrl + '/ingredients/search?value=' + arg);
   }
 
   addProducts(body) {
-    return this.http.post(this.baseUrl + '/products', body, {headers: this.generateHeader()});
+    let header = this.generateHeader();
+    return this.http.post(this.baseUrl + '/products', body, header);
   }
 
   addIngredients(body) {
-    return this.http.post(this.baseUrl + '/ingredients', {headers: this.generateHeader()});
+    let header = this.generateHeader();
+    return this.http.post(this.baseUrl + '/ingredients', body, header);
+  }
+
+  addNotifications(body) {
+    let header = this.generateHeader();
+    return this.http.post(this.baseUrl + '/notifications', body, header);
+  }
+
+  addEffects(body) {
+    let header = this.generateHeader();
+    return this.http.post(this.baseUrl + '/effects', body, header);
   }
 
   getAllProducts() {
@@ -33,6 +52,18 @@ export class HttpServiceService {
 
   getAllIngredients() {
     return this.http.get(this.baseUrl + '/ingredients');
+  }
+
+  getAllNotifications() {
+    return this.http.get(this.baseUrl + '/notifications');
+  }
+
+  getAllEffects() {
+    return this.http.get(this.baseUrl + '/effects');
+  }
+
+  getIngredientById(id) {
+    return this.http.get(this.baseUrl + '/ingredients/' + id);
   }
 
   signup(body) {

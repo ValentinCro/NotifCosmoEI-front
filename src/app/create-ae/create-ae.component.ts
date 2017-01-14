@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Http} from "@angular/http";
 import { HttpServiceService } from '../http-service.service'
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-create-ae',
@@ -8,80 +8,156 @@ import { HttpServiceService } from '../http-service.service'
   styleUrls: ['./create-ae.component.css']
 })
 export class CreateAEComponent implements OnInit {
-  productName : string = "";
-  ingredients: Array<{ingredientName: string, idIngredient: number}> = [];
-  symptomes : Array<{symptomeName: string, idSymptome: number}> = [];
-  loadProducts : boolean = false;
-  loadIngredients : boolean = false;
-  loadSymptomes : boolean = false;
+  searchString : string = "";
+  searchIngredient : string = "";
+  ingredients: Array<{name : string, id: number}> = [];
+  products: Array<{name: string, id: number, ingredients : Array<{id: number}>}> = [];
   dataProducts : any = [];
   dataIngredients : any = [];
-  dataSymptomes: any = [];
-  ingredientID: number = 0;
-  symptomeID: number = 0;
 
-  constructor(private http: HttpServiceService) { }
+  constructor(private http: HttpServiceService) {
+  }
 
   ngOnInit() {
 
   }
 
-  getProducts() {
-    this.loadProducts = true;
-    this.loadIngredients = true;
-    this.loadSymptomes = true;
+  addIngredient() {
+    let find = false;
+    let data = {name : this.searchIngredient};
+    this.searchIngredient = "";
+    this.http.searchIngredients(this.searchIngredient)
+      .map(res => res.json())
+      .subscribe(res => {
+        if (res.length > 0) {
+          for (let ing of res) {
+            if (ing.name == data.name) {
+              find = true;
+              this.ingredients.push(ing);
+            }
+          }
+
+        }
+        if (!find) {
+          this.http.addIngredients(data)
+            .map(res => res.json())
+            .subscribe(res => {
+              this.ingredients.push(res);
+            });
+        }
+      });
   }
 
-  addIngredient() {
-    let ingredient = {ingredientName: "", idIngredient: this.ingredientID};
+  addExistingIngredient(ingredient) {
     this.ingredients.push(ingredient);
-    this.ingredientID++;
+    this.searchIngredient = "";
+    this.dataIngredients = [];
   }
 
   removeIngredient(ingredient) {
     let tmp = this.ingredients;
     this.ingredients = [];
-    for(let item of tmp) {
-      if (ingredient.idIngredient != item.idIngredient) {
-        this.ingredients.push(item);
-      }
+    for (let tmpIngredient of tmp) {
+     if (ingredient.name != tmpIngredient.name) {
+       this.ingredients.push(tmpIngredient);
+     }
     }
   }
 
-  addSymptome() {
-    let symptome = {symptomeName: "", idSymptome: this.symptomeID};
-    this.symptomes.push(symptome);
-    this.symptomeID++;
-  }
-
-  removeSymptome(symptome) {
-    let tmp = this.symptomes;
-    this.symptomes = [];
-    for(let item of tmp) {
-      if (symptome.idSymptome != item.idSymptome) {
-        this.symptomes.push(item);
-      }
-    }
-  }
-
-  save() {
-    let ingredientsToSave = [];
-    for (let ingredient of this.ingredients) {
-      ingredientsToSave.push(ingredient.ingredientName);
-    }
-    let idIngredients = [];
-
-    for (let ingredient of ingredientsToSave) {
-      let data = {
-        "name": ingredient
-      };
-      this.http.addIngredients(data)
-      // extract json body
+  searchIngredients() {
+    this.dataIngredients = [];
+    if (this.searchIngredient.length > 0 && this.searchIngredient != " ") {
+      this.http.searchIngredients(this.searchIngredient)
         .map(res => res.json())
         .subscribe(res => {
-          console.log(res);
-          idIngredients.push();
+          for (let ingredient of res) {
+            let find = false;
+            for (let addedIngredient of this.ingredients) {
+              if (ingredient.name == addedIngredient.name) {
+                find = true;
+              }
+            }
+            if (!find) {
+              this.dataIngredients.push(ingredient);
+            }
+          }
         });
     }
+  }
+
+  searchProducts() {
+    this.http.searchProducts(this.searchString)
+    // extract json body
+      .map(res => res.json())
+      .subscribe(res => {
+        this.dataProducts = [];
+        for (let product of res) {
+          let find = false;
+          for (let addedProduct of this.products) {
+            if (product.name == addedProduct.name) {
+              find = true;
+            }
+          }
+          if (!find) {
+            this.dataProducts.push(product);
+          }
+        }
+      });
+
+  }
+
+  addProduct() {
+
+    let idIngredients = [];
+    for (let ingredient of this.ingredients) {
+      idIngredients.push(ingredient.id);
+    }
+
+    let bodyData = {
+      name : this.searchString,
+      ingredients : idIngredients
+    };
+
+    this.searchString = "";
+    this.dataProducts = [];
+
+    this.http.addProducts(bodyData)
+    // extract json body
+      .map(res => res.json())
+      .subscribe(res => {
+        this.products.push(res);
+      });
+  }
+
+  removeProduct(product) {
+    let tmp = this.products;
+    this.products = [];
+    for (let tmpProduct of tmp) {
+      if (tmpProduct.name != product.name) {
+        this.products.push(tmpProduct);
+      }
+    }
+
+    if (this.searchString.length > 0) {
+      this.searchProducts();
+    }
+  }
+
+  getInfoProduct(product) {
+    let info = "Liste des ingrédients : ";
+    let request = [];
+    for (let idIngredients of product.ingredients) {
+      request.push(this.http.getIngredientById(idIngredients));
+    }
+    Observable.forkJoin(request)
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
+
+  addExistingProduct(product) {
+    this.searchString = "";
+    this.dataProducts = [];
+    this.products.push(product);
   }
 }
