@@ -13,7 +13,9 @@ import { LogingComponent } from './loging/loging.component';
 import { CreateAEComponent } from './create-ae/create-ae.component';
 import { SearchComponent } from './search/search.component';
 
-import { HttpServiceService } from './http-service.service'
+import { HttpServiceService } from './http-service.service';
+import { NotifificationComponent } from './notifification/notifification.component';
+import { ProductComponent } from './product/product.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { HttpServiceService } from './http-service.service'
     RegisterComponent,
     LogingComponent,
     CreateAEComponent,
-    SearchComponent
+    SearchComponent,
+    NotifificationComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

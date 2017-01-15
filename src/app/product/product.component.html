@@ -1,0 +1,14 @@
+<h2>Détail de l'ingrédient</h2>
+<div class="row">
+  <div class="callout columns large-12 medium-12 small-12">
+    <p>
+      <strong>Nom de l'ingrédient : </strong> {{ product.name }}
+    </p>
+    <strong>Liste des ingrédients : </strong>
+    <ol>
+      <li *ngFor="let ingredient of ingredients">
+        {{ ingredient.name }}
+      </li>
+    </ol>
+  </div>
+</div>

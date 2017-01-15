@@ -6,23 +6,21 @@
 <div class="row">
   <div class="columns medium-12 large-12 small-12">
     <div class="callout text-center">
-      <h3>Les dernières notifications</h3>
+      <h3>Les Effets les plus reportés</h3>
         <table class="hover hide-for-small-only">
           <thead>
           <tr>
             <th width="50"></th>
-            <th>Produit</th>
-            <th>Ingrédients</th>
-            <th>Symptomes</th>
+            <th>Description</th>
+            <th>Niveau</th>
             <th width="100"></th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td><span class="badge">0</span></td>
-            <td>teinture capillaire</td>
-            <td>ammoniaque</td>
-            <td>irritation</td>
+          <tr *ngFor="let effect of mostReportedEffects">
+            <td><span class="badge">{{ effect.nbNotifications }}</span></td>
+            <td>{{ effect.description }}</td>
+            <td>{{ effect.level }}</td>
             <td><span class="label">Nouveau !</span></td>
           </tr>
           </tbody>
@@ -31,18 +29,60 @@
         <thead>
         <tr>
           <th width="50"></th>
-          <th>Produit</th>
-          <th>Ingrédients</th>
-          <th>Symptomes</th>
+          <th>Description</th>
+          <th>Niveau</th>
           <th width="100"></th>
         </tr>
         </thead>
         <tbody>
+        <tr *ngFor="let effect of mostReportedEffects">
+          <td><span class="badge">{{ effect.nbNotifications }}</span></td>
+          <td>{{ effect.description }}</td>
+          <td>{{ effect.level }}</td>
+          <td><span class="label">Nouveau !</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="columns medium-12 large-12 small-12">
+    <div class="callout text-center">
+      <h3>Les Effets les plus lourds</h3>
+      <table class="hover hide-for-small-only">
+        <thead>
         <tr>
-          <td><span class="badge">0</span></td>
-          <td>teinture capillaire</td>
-          <td>ammoniaque</td>
-          <td>irritation</td>
+          <th width="50"></th>
+          <th>Description</th>
+          <th>Niveau</th>
+          <th width="100"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let effect of heaviestEffects">
+          <td><span class="badge">{{ effect.nbNotifications }}</span></td>
+          <td>{{ effect.description }}</td>
+          <td>{{ effect.level }}</td>
+          <td><span class="label">Nouveau !</span></td>
+        </tr>
+        </tbody>
+      </table>
+      <table class="hover scroll show-for-small-only">
+        <thead>
+        <tr>
+          <th width="50"></th>
+          <th>Description</th>
+          <th>Niveau</th>
+          <th width="100"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let effect of heaviestEffects ">
+          <td><span class="badge">{{ effect.nbNotifications }}</span></td>
+          <td>{{ effect.description }}</td>
+          <td>{{ effect.level }}</td>
           <td><span class="label">Nouveau !</span></td>
         </tr>
         </tbody>

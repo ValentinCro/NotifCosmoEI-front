@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Http} from "@angular/http";
+import { Component, OnInit } from '@angular/core'
+import { HttpServiceService } from '../http-service.service'
 
 @Component({
   selector: 'app-home',
@@ -7,17 +7,28 @@ import {Http} from "@angular/http";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  products : any = [];
-  constructor(private http: Http) {
-    this.getProducts();
+  mostReportedEffects : any = [];
+  heaviestEffects : any = [];
+  constructor(private http: HttpServiceService) {
+    this.getMostReportedEffects();
+    this.getHeaviestEffects();
   }
 
-  getProducts () {
-    this.http.get("http://localhost:8080/products")
-    // extract json body
+  getMostReportedEffects () {
+    this.http.getMostReportedEffect()
       .map(res => res.json())
       .subscribe(res => {
         console.log(res);
+        this.mostReportedEffects = res;
+      });
+  }
+
+  getHeaviestEffects () {
+    this.http.getHeaviestEffect()
+      .map(res => res.json())
+      .subscribe(res => {
+        console.log(res);
+        this.heaviestEffects = res;
       });
   }
 

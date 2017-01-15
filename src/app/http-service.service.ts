@@ -26,6 +26,10 @@ export class HttpServiceService {
     return this.http.get(this.baseUrl + '/ingredients/search?value=' + arg);
   }
 
+  searchEffects(arg) {
+    return this.http.get(this.baseUrl + '/effects/search?value=' + arg);
+  }
+
   addProducts(body) {
     let header = this.generateHeader();
     return this.http.post(this.baseUrl + '/products', body, header);
@@ -62,8 +66,28 @@ export class HttpServiceService {
     return this.http.get(this.baseUrl + '/effects');
   }
 
+  getNotificationById(id) {
+    return this.http.get(this.baseUrl + '/notifications/' + id);
+  }
+
+  getProductById(id) {
+    return this.http.get(this.baseUrl + '/products/' + id);
+  }
+
+  getEffectById(id) {
+    return this.http.get(this.baseUrl + '/effects/' + id);
+  }
+
   getIngredientById(id) {
     return this.http.get(this.baseUrl + '/ingredients/' + id);
+  }
+
+  getMostReportedEffect() {
+    return this.http.get(this.baseUrl + '/effects/most_reported');
+  }
+
+  getHeaviestEffect() {
+    return this.http.get(this.baseUrl + '/effects/heaviest');
   }
 
   signup(body) {
@@ -72,5 +96,9 @@ export class HttpServiceService {
 
   signin(body) {
     return this.http.post(this.baseUrl + '/user/login', body);
+  }
+
+  getRegionsCode() {
+    return this.http.get("https://geo.api.gouv.fr/regions");
   }
 }

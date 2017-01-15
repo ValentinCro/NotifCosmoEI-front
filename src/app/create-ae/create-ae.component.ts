@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../http-service.service'
 import {Observable} from "rxjs";
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-create-ae',
@@ -10,16 +11,42 @@ import {Observable} from "rxjs";
 export class CreateAEComponent implements OnInit {
   searchString : string = "";
   searchIngredient : string = "";
+  searchEffectString : string = "";
   ingredients: Array<{name : string, id: number}> = [];
   products: Array<{name: string, id: number, ingredients : Array<{id: number}>}> = [];
+  effects : any = [];
   dataProducts : any = [];
+  dataEffects : any = [];
   dataIngredients : any = [];
+  infoProduct : any = {};
+  regionsCode : any = [];
+  code : string = "01";
 
-  constructor(private http: HttpServiceService) {
+
+  constructor(private http: HttpServiceService, private router: Router) {
   }
 
   ngOnInit() {
+    this.http.getRegionsCode()
+      .map(res => res.json())
+      .subscribe(res => {
+        this.regionsCode = res;
+      });
+  }
 
+  setInfoProduct(product) {
+    this.infoProduct.name = product.name;
+    let tabIngredient = [];
+
+    for (let ingredientId of product.ingredients) {
+      this.http.getIngredientById(ingredientId)
+        .map(res => res.json())
+        .subscribe(res => {
+            tabIngredient.push(res);
+        })
+    }
+
+    this.infoProduct.ingredients = tabIngredient;
   }
 
   addIngredient() {
@@ -159,5 +186,79 @@ export class CreateAEComponent implements OnInit {
     this.searchString = "";
     this.dataProducts = [];
     this.products.push(product);
+  }
+
+  searchEffects() {
+    this.dataEffects = [];
+    this.http.searchEffects(this.searchEffectString)
+      .map(res => res.json())
+      .subscribe(res => {
+        for (let effect of res) {
+          let find = false;
+          for (let effectAdded of this.effects) {
+            if (effect.id == effectAdded.id) {
+              find = true;
+            }
+          }
+          if (!find) {
+            this.dataEffects.push(effect);
+          }
+        }
+      });
+  }
+
+  addExistingEffect(effect) {
+    this.searchEffectString = "";
+    this.dataEffects = [];
+    this.effects.push(effect);
+  }
+
+  addEffect() {
+    let dataBody = {
+      description: this.searchEffectString
+    };
+    this.http.addEffects(dataBody)
+      .map(res=> res.json())
+      .subscribe(res => {
+        this.searchEffectString = "";
+        this.effects.push(res);
+      });
+  }
+
+  saveNotif() {
+    let effectsId = [];
+    for (let effect of this.effects) {
+      effectsId.push(effect.id);
+    }
+
+    let productsId = []
+    for (let product of this.products) {
+      productsId.push(product.id);
+    }
+
+    let bodyData = {
+      effects : effectsId,
+      products : productsId,
+      code : this.code
+    };
+    this.http.addNotifications(bodyData)
+      .map(res => res.json())
+      .subscribe(res => {
+        console.log(res);
+        this.router.navigate(['/notification', res.id]);
+      });
+  }
+
+  removeEffect(effect) {
+    let tmp = this.effects;
+    this.effects = [];
+    for (let tmpEffect of tmp) {
+      if (effect.id != tmpEffect.id) {
+        this.effects.push(tmpEffect);
+      }
+    }
+    if (this.searchEffectString.length > 0) {
+      this.searchEffects();
+    }
   }
 }

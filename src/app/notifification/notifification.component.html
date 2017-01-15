@@ -1,0 +1,13 @@
+<h2>Notification</h2>
+<div class="row">
+  <div class="callout">
+      <h4>Liste des produits : </h4>
+      <ol>
+        <li *ngFor="let product of products"><a [routerLink]="['/product', product.id]"> {{ product.name }} </a></li>
+      </ol>
+    <h4>Liste des effets : </h4>
+    <ol>
+      <li *ngFor="let effect of effects"> {{ effect.description }} </li>
+    </ol>
+  </div>
+</div>
