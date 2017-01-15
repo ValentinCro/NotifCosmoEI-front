@@ -1,0 +1,41 @@
+
+  <h1>Nouveau produit</h1>
+  <div class="row">
+    <div class="callout columns large-12 medium-12 small-12">
+      <p *ngIf="alreadyExist == true"><i class="fi-alert"></i> Ce produit existe déjà</p>
+      <label>
+        Nom du produit
+        <input type="text" [(ngModel)]="name">
+      </label>
+      <label>
+        Nom de l'ingrédient
+        <input type="text" [(ngModel)]="searchIngredient" (keyup.enter)="addIngredient()" (ngModelChange)="searchIngredients()">
+      </label>
+      <small *ngIf="this.searchIngredient.length > 0">Appuyez sur entrer si vous ne voyez pas l'ingrédient voulu dans la liste proposée</small>
+      <small *ngIf="this.ingredients.length == 0">Vous devez ajouter au moins un ingrédient</small>
+    </div>
+  </div>
+
+  <div *ngIf="dataIngredients.length > 0" class="row">
+    <div class="callout columns large-12 medium-12 small-12">
+      <p><small>Nouvel ingrédient : (cliquez pour ajouter l'ingrédient)</small>
+        <span class="label add-tag tag" *ngFor="let ingredient of dataIngredients" (click)="addExistingIngredient(ingredient)">
+          {{ ingredient.name }}
+        </span>
+      </p>
+    </div>
+  </div>
+  <div *ngIf="ingredients.length > 0" class="row">
+    <div class="callout columns large-12 medium-12 small-12">
+      <p><small>Ingrédient ajouté : (cliquez pour supprimer l'ingrédient)</small>
+        <span class="label added-tag tag" *ngFor="let ingredient of ingredients" (click)="removeIngredient(ingredient)">
+        {{ ingredient.name }}
+      </span>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <button class="button primary" type="button" (click)="addProduct()" [disabled]="ingredients.length == 0">
+      Validez
+    </button>
+  </div>

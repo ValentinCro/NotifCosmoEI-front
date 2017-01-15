@@ -3,7 +3,15 @@
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text">Cosmos EI</li>
       <li><a href="#" routerLink="/">Accueil</a></li>
-      <li><a href="" routerLink="/newAE">Nouvel effet indésirable</a></li>
+      <li *ngIf="isConnected()">
+        <a href="#">Creation</a>
+        <ul class="menu vertical">
+          <li><a href="" routerLink="/newAE">Notification</a></li>
+          <li><a href="" routerLink="/newProduct">Produit</a></li>
+          <li><a href="" routerLink="/newEffect">Effet Indésirable</a></li>
+          <li><a href="" routerLink="/newIngredient">Ingrédient</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
   <div class="top-bar-right">

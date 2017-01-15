@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpServiceService } from '../http-service.service'
+import { HttpServiceService } from '../http-service.service';
 import {Observable} from "rxjs";
-import { Router, ActivatedRoute } from "@angular/router"
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-create-ae',
@@ -195,18 +195,6 @@ export class CreateAEComponent implements OnInit {
     if (this.searchString.length > 0) {
       this.searchProducts();
     }
-  }
-
-  getInfoProduct(product) {
-    let info = "Liste des ingrédients : ";
-    let request = [];
-    for (let idIngredients of product.ingredients) {
-      request.push(this.http.getIngredientById(idIngredients));
-    }
-    Observable.forkJoin(request)
-      .subscribe(data => {
-        console.log(data);
-      });
   }
 
   addExistingProduct(product) {

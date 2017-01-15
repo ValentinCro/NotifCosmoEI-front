@@ -1,0 +1,17 @@
+<h1>Nouvel effet</h1>
+<div class="row">
+  <div class="callout columns large-12 medium-12 small-12">
+
+    <p *ngIf="alreadyExist == true"><i class="fi-alert"></i> Cet effet indésirable existe déjà</p>
+    <label>
+      Description
+      <textarea [(ngModel)]="searchEffectString"></textarea>
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <button class="button primary" type="button" (click)="addEffect()" [disabled]="searchEffectString.length == 0">
+    Validez
+  </button>
+</div>

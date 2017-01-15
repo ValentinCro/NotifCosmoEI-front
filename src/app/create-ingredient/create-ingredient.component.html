@@ -1,0 +1,15 @@
+<h2>Création d'ingrédient</h2>
+<div class="row">
+  <div class="callout columns large-12 medium-12 small-12">
+    <p *ngIf="alreadyExist == true"><i class="fi-alert"></i> Cet ingrédient existe déjà</p>
+    <label>
+      Nom de l'ingrédient
+      <input type="text" [(ngModel)]="name" (keyup.enter)="addIngredient()">
+    </label>
+  </div>
+</div>
+<div class="row">
+  <button class="button primary" data-close type="button" (click)="addIngredient()">
+    Validez
+  </button>
+</div>

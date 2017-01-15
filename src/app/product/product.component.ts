@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router"
+import { ActivatedRoute, Router } from "@angular/router"
 import { HttpServiceService } from '../http-service.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { HttpServiceService } from '../http-service.service';
 export class ProductComponent implements OnInit {
   product : any = {};
   ingredients : any = [];
-  constructor(private http : HttpServiceService, private route : ActivatedRoute) { }
+  constructor(private http : HttpServiceService, private route : ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -26,7 +26,12 @@ export class ProductComponent implements OnInit {
                 this.ingredients.push(res);
               });
           }
-        });
+        },
+          error => {
+            if (error.status == 404) {
+              this.router.navigate(['/not-found/', id]);
+            }
+          });
     });
   }
 

@@ -16,7 +16,13 @@ import { SearchComponent } from './search/search.component';
 import { HttpServiceService } from './http-service.service';
 import { NotifificationComponent } from './notifification/notifification.component';
 import { ProductComponent } from './product/product.component';
-import { MyNotificationComponent } from './my-notification/my-notification.component'
+import { MyNotificationComponent } from './my-notification/my-notification.component';
+import { CreateProductComponent } from './create-product/create-product.component';
+import { CreateEffectComponent } from './create-effect/create-effect.component';
+import { EffectComponent } from './effect/effect.component';
+import { IngredientComponent } from './ingredient/ingredient.component';
+import { ObjectNotFoundComponent } from './object-not-found/object-not-found.component';
+import { CreateIngredientComponent } from './create-ingredient/create-ingredient.component'
 
 @NgModule({
   declarations: [
@@ -29,7 +35,13 @@ import { MyNotificationComponent } from './my-notification/my-notification.compo
     SearchComponent,
     NotifificationComponent,
     ProductComponent,
-    MyNotificationComponent
+    MyNotificationComponent,
+    CreateProductComponent,
+    CreateEffectComponent,
+    EffectComponent,
+    IngredientComponent,
+    ObjectNotFoundComponent,
+    CreateIngredientComponent
   ],
   imports: [
     BrowserModule,
