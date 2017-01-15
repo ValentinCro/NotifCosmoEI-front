@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../http-service.service'
 import {Observable} from "rxjs";
-import {Router} from "@angular/router"
+import { Router, ActivatedRoute } from "@angular/router"
 
 @Component({
   selector: 'app-create-ae',
@@ -21,9 +21,36 @@ export class CreateAEComponent implements OnInit {
   infoProduct : any = {};
   regionsCode : any = [];
   code : string = "01";
+  newNotif : boolean = true;
 
 
-  constructor(private http: HttpServiceService, private router: Router) {
+  constructor(private http: HttpServiceService, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      const id = params['notifId'];
+      if (id != undefined) {
+        this.newNotif = false;
+        this.http.getNotificationById(id)
+          .map(res => res.json())
+          .subscribe(res => {
+
+            for (let product of res.products) {
+              this.http.getProductById(product)
+                .map(res => res.json())
+                .subscribe(res => {
+                  this.products.push(res);
+                });
+            }
+            for (let effect of res.effects) {
+              this.http.getEffectById(effect)
+                .map(res => res.json())
+                .subscribe(res => {
+                  this.effects.push(res);
+                });
+            }
+            this.code = res.code;
+          });
+      }
+    });
   }
 
   ngOnInit() {
@@ -241,12 +268,19 @@ export class CreateAEComponent implements OnInit {
       products : productsId,
       code : this.code
     };
-    this.http.addNotifications(bodyData)
-      .map(res => res.json())
-      .subscribe(res => {
-        console.log(res);
-        this.router.navigate(['/notification', res.id]);
-      });
+    if (this.newNotif) {
+      this.http.addNotifications(bodyData)
+        .map(res => res.json())
+        .subscribe(res => {
+          this.router.navigate(['/notification', res.id]);
+        });
+    } else {
+      this.http.updateNotification(bodyData)
+        .map(res => res.json())
+        .subscribe(res => {
+          this.router.navigate(['/notification', res.id]);
+        });
+    }
   }
 
   removeEffect(effect) {

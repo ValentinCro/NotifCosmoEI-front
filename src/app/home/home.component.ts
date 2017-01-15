@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
     this.http.getMostReportedEffect()
       .map(res => res.json())
       .subscribe(res => {
-        console.log(res);
         this.mostReportedEffects = res;
       });
   }
@@ -27,7 +26,6 @@ export class HomeComponent implements OnInit {
     this.http.getHeaviestEffect()
       .map(res => res.json())
       .subscribe(res => {
-        console.log(res);
         this.heaviestEffects = res;
       });
   }

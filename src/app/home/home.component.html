@@ -10,36 +10,32 @@
         <table class="hover hide-for-small-only">
           <thead>
           <tr>
-            <th width="50"></th>
+            <th width="140">Nb. notification</th>
             <th>Description</th>
-            <th>Niveau</th>
-            <th width="100"></th>
+            <th class="text-center">Niveau</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let effect of mostReportedEffects">
             <td><span class="badge">{{ effect.nbNotifications }}</span></td>
-            <td>{{ effect.description }}</td>
+            <td class="text-left">{{ effect.description }}</td>
             <td>{{ effect.level }}</td>
-            <td><span class="label">Nouveau !</span></td>
           </tr>
           </tbody>
         </table>
       <table class="hover scroll show-for-small-only">
         <thead>
         <tr>
-          <th width="50"></th>
+          <th width="140">Nb. notification</th>
           <th>Description</th>
-          <th>Niveau</th>
-          <th width="100"></th>
+          <th class="text-center">Niveau</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let effect of mostReportedEffects">
           <td><span class="badge">{{ effect.nbNotifications }}</span></td>
-          <td>{{ effect.description }}</td>
+          <td class="text-left">{{ effect.description }}</td>
           <td>{{ effect.level }}</td>
-          <td><span class="label">Nouveau !</span></td>
         </tr>
         </tbody>
       </table>
@@ -54,36 +50,32 @@
       <table class="hover hide-for-small-only">
         <thead>
         <tr>
-          <th width="50"></th>
+          <th width="140">Nb. notification</th>
           <th>Description</th>
-          <th>Niveau</th>
-          <th width="100"></th>
+          <th class="text-center">Niveau</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let effect of heaviestEffects">
           <td><span class="badge">{{ effect.nbNotifications }}</span></td>
-          <td>{{ effect.description }}</td>
+          <td class="text-left">{{ effect.description }}</td>
           <td>{{ effect.level }}</td>
-          <td><span class="label">Nouveau !</span></td>
         </tr>
         </tbody>
       </table>
       <table class="hover scroll show-for-small-only">
         <thead>
         <tr>
-          <th width="50"></th>
+          <th width="140">Nb. notification</th>
           <th>Description</th>
-          <th>Niveau</th>
-          <th width="100"></th>
+          <th class="text-center">Niveau</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let effect of heaviestEffects ">
           <td><span class="badge">{{ effect.nbNotifications }}</span></td>
-          <td>{{ effect.description }}</td>
+          <td class="text-left">{{ effect.description }}</td>
           <td>{{ effect.level }}</td>
-          <td><span class="label">Nouveau !</span></td>
         </tr>
         </tbody>
       </table>

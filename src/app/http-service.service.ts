@@ -90,6 +90,10 @@ export class HttpServiceService {
     return this.http.get(this.baseUrl + '/effects/heaviest');
   }
 
+  updateNotification(body) {
+    return this.http.put(this.baseUrl + '/notifications', body);
+  }
+
   signup(body) {
     return this.http.post(this.baseUrl + '/user/signup', body);
   }
