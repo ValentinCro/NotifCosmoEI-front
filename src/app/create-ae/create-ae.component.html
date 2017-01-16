@@ -1,29 +1,71 @@
-<h2>Ajouter une notification</h2>
-<div class="row">
-  <div class="callout columns large-12 medium-12 small-12">
-    <label>
-      Rechercher un produit
-      <input type="text" [(ngModel)]="searchString" (ngModelChange)="searchProducts()">
-    </label>
-    <div *ngFor="let product of dataProducts" class="columns medium-2 large-2 callout card_existing">
-      <button (click)="setInfoProduct(product)" data-open="modalInfoProduct" class="button primary"><i class="fi-info"></i></button>
-      <button (click)="addExistingProduct(product)" class="button primary"><i class="fi-plus"></i></button>
-      <p>{{ product.name }}</p>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Création de notification
+      </h1>
     </div>
-    <div data-open="exampleModal1" class="columns medium-2 large-2 callout card_new">Nouveau Produit</div>
   </div>
-</div>
-<div class="row">
-  <div class="callout columns large-12 medium-12 small-12">
-    <h3>Produit ajouté</h3>
-    <div *ngFor="let product of products" class="columns medium-2 large-2 callout card_existing">
-      <button (click)="setInfoProduct(product)" data-open="modalInfoProduct"  class="button primary"><i class="fi-info"></i></button>
-      <button (click)="removeProduct(product)" class="button primary"><i class="fi-minus"></i></button>
-      <p>{{ product.name }}</p>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <label class="label">
+                Rechercher un produit
+              </label>
+              <input class="input" type="text" [(ngModel)]="searchString" (ngModelChange)="searchProducts()">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p *ngIf="products.length == 0">Aucun produit ajouté</p>
+    <div class="columns">
+      <div class="column is-2" *ngFor="let product of dataProducts">
+        <div class="card card_new">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <button (click)="setInfoProduct(product)" data-open="modalInfoProduct" class="button primary"><i class="fa fa-info"></i></button>
+              <button (click)="addExistingProduct(product)" class="button primary"><i class="fa fa-plus"></i></button>
+              <p>{{ product.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-2">
+        <div class="card card_new">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              Nouveau Produit
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">Produit ajouté</p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <div *ngFor="let product of products" class="columns medium-2 large-2 callout card_existing">
+                <button (click)="setInfoProduct(product)" data-open="modalInfoProduct"  class="button primary"><i class="fi-info"></i></button>
+                <button (click)="removeProduct(product)" class="button primary"><i class="fi-minus"></i></button>
+                <p>{{ product.name }}</p>
+              </div>
+              <p *ngIf="products.length == 0">Aucun produit ajouté</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 <div class="row" *ngIf="products.length > 0">
   <div class="callout columns large-12 medium-12 small-12">

@@ -1,31 +1,42 @@
-<div class="top-bar">
-  <div class="top-bar-left">
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text">Cosmos EI</li>
-      <li><a href="#" routerLink="/">Accueil</a></li>
-      <li *ngIf="isConnected()">
-        <a href="#">Creation</a>
-        <ul class="menu vertical">
-          <li><a href="" routerLink="/newAE">Notification</a></li>
-          <li><a href="" routerLink="/newProduct">Produit</a></li>
-          <li><a href="" routerLink="/newEffect">Effet Indésirable</a></li>
-          <li><a href="" routerLink="/newIngredient">Ingrédient</a></li>
-        </ul>
-      </li>
-    </ul>
+<nav class="nav">
+  <div class="nav-left">
+    <a class="nav-item" routerLink="/">
+      Cosmos EI
+    </a>
+    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/newAE">+ Notification</a>
+    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/newProduct">+ Produit</a>
+    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/newEffect">+ Effet Indésirable</a>
+    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/newIngredient">+ Ingrédient</a>
   </div>
-  <div class="top-bar-right">
-    <ul class="menu" *ngIf="!isConnected()">
-      <li><a href="" routerLink="/register" class="button secondary">S'inscrire</a></li>
-      <li><a href="" routerLink="/log" type="button" class="button">Se connecter</a></li>
-    </ul>
-    <ul class="menu" *ngIf="isConnected()">
-      <li><a href="" routerLink="/myNotification">Mes notifications</a></li>
-      <li><a href="" routerLink="/search" class="button"><i class="fi-magnifying-glass"></i></a></li>
-      <li><a href="" routerLink="" class="button" (click)="disconnect()"><i class="fi-power"></i></a></li>
-    </ul>
+
+  <div class="nav-center">
   </div>
-</div>
+
+  <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
+  <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
+  <span class="nav-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </span>
+
+  <!-- This "nav-menu" is hidden on mobile -->
+  <!-- Add the modifier "is-active" to display it on mobile -->
+  <div class="nav-right nav-menu">
+
+    <span class="nav-item" *ngIf="!isConnected()">
+      <a href="" routerLink="/register" class="button secondary">S'inscrire</a>
+      <a href="" routerLink="/log" type="button" class="button">Se connecter</a>
+    </span>
+    <a *ngIf="isConnected()" class="nav-item" href="" routerLink="/myNotification">Mes notifications </a>
+
+    <span class="nav-item" *ngIf="isConnected()">
+      <a href="" routerLink="/search" class="button"><i class="fa fa-search"></i></a>
+      <a href="" routerLink="" class="button" (click)="disconnect()"><i class="fa fa-power-off"></i></a>
+    </span>
+
+  </div>
+</nav>
 
 <router-outlet></router-outlet>
 

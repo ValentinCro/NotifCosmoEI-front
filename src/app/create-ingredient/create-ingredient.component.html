@@ -1,15 +1,35 @@
-<h2>Création d'ingrédient</h2>
-<div class="row">
-  <div class="callout columns large-12 medium-12 small-12">
-    <p *ngIf="alreadyExist == true"><i class="fi-alert"></i> Cet ingrédient existe déjà</p>
-    <label>
-      Nom de l'ingrédient
-      <input type="text" [(ngModel)]="name" (keyup.enter)="addIngredient()">
-    </label>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Création d'ingrédient
+      </h1>
+    </div>
   </div>
-</div>
-<div class="row">
-  <button class="button primary" data-close type="button" (click)="addIngredient()">
-    Validez
-  </button>
-</div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <p *ngIf="alreadyExist == true"><i class="fi-alert"></i> Cet ingrédient existe déjà</p>
+              <label class="label">
+                Nom de l'ingrédient
+              </label>
+              <p class="control">
+                <input  class="input" type="text" [(ngModel)]="name" (keyup.enter)="addIngredient()">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <button class="button primary" data-close type="button is-primary" (click)="addIngredient()">
+        Validez
+      </button>
+    </div>
+  </div>
+</section>

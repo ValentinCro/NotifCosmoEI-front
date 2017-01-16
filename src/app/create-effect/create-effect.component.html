@@ -1,17 +1,35 @@
-<h1>Nouvel effet</h1>
-<div class="row">
-  <div class="callout columns large-12 medium-12 small-12">
-
-    <p *ngIf="alreadyExist == true"><i class="fi-alert"></i> Cet effet indésirable existe déjà</p>
-    <label>
-      Description
-      <textarea [(ngModel)]="searchEffectString"></textarea>
-    </label>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Création d'effet indésirable
+      </h1>
+    </div>
   </div>
-</div>
-
-<div class="row">
-  <button class="button primary" type="button" (click)="addEffect()" [disabled]="searchEffectString.length == 0">
-    Validez
-  </button>
-</div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <p *ngIf="alreadyExist == true"><i class="fi-alert"></i> Cet effet indésirable existe déjà</p>
+              <label class="label">
+                Description
+              </label>
+              <p class="control">
+                <textarea class="textarea" [(ngModel)]="searchEffectString"></textarea>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <button class="button is-primary" type="button" (click)="addEffect()" [disabled]="searchEffectString.length == 0">
+        Validez
+      </button>
+    </div>
+  </div>
+</section>
