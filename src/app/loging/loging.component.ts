@@ -10,7 +10,6 @@ import {Router} from "@angular/router"
 export class LogingComponent implements OnInit {
   login: string = "";
   password: string = "";
-  stayConnected : boolean = false;
   constructor(public http: HttpServiceService, private router: Router) {
     if (localStorage.getItem('token') != undefined) {
       this.router.navigate([""]);

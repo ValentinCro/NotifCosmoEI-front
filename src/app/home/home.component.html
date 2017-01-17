@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let effect of mostReportedEffects">
-                  <td><span class="badge">{{ effect.nbNotifications }}</span></td>
+                  <td><span class="tag is-primary">{{ effect.nbNotifications }}</span></td>
                   <td class="text-left">{{ effect.description }}</td>
                   <td>{{ effect.level }}</td>
                 </tr>
@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let effect of heaviestEffects">
-                  <td><span class="badge">{{ effect.nbNotifications }}</span></td>
+                  <td><span class="tag is-primary">{{ effect.nbNotifications }}</span></td>
                   <td class="text-left">{{ effect.description }}</td>
                   <td>{{ effect.level }}</td>
                 </tr>

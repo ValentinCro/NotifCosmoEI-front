@@ -1,31 +1,46 @@
-<div class="row">
-  <h2>Se connecter</h2>
-    <div class="row">
-    <div class="columns large-offset-2 large-8 medium-offset-2 medium-8 small-12">
-      <div class="callout">
-        <h3>Connexion</h3>
-        <form>
-          <div class="row">
-            <div class="medium-12 columns">
-              <label>Nom d'utilisateur
-                <input type="text" [(ngModel)]="login" name="login">
-              </label>
-            </div>
-            <div class="medium-12 columns">
-              <label>Mot de passe
-                <input type="password" [(ngModel)]="password" name="password">
-              </label>
-            </div>
-            <div class="medium-12 columns">
-              <input type="checkbox" [(ngModel)]="stayConnected" name="stayConnected">
-              <label>Rester connecté</label>
-            </div>
-            <div class="medium-12 columns">
-              <button type="button" class="button" (click)="log()">connexion</button>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Connexion
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <div class="columns">
+                <div class="column">
+                  <label class="label">Nom d'utilisateur
+                  </label>
+                  <p class="control">
+                    <input type="text" [(ngModel)]="login" name="login" class="input">
+                  </p>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <label class="label">Mot de passe
+                  </label>
+                  <p class="control">
+                    <input class="input" type="password" [(ngModel)]="password" name="password">
+                  </p>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <button type="button" class="button is-primary" (click)="log()">connexion</button>
+                </div>
+              </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

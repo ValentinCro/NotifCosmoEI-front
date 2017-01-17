@@ -22,6 +22,9 @@ export class CreateAEComponent implements OnInit {
   regionsCode : any = [];
   code : string = "01";
   newNotif : boolean = true;
+  createProductShow : boolean = false;
+  createEffectShow : boolean = false;
+  ProductInfoShow : boolean = false;
 
 
   constructor(private http: HttpServiceService, private router: Router, private route: ActivatedRoute) {
@@ -74,6 +77,7 @@ export class CreateAEComponent implements OnInit {
     }
 
     this.infoProduct.ingredients = tabIngredient;
+    this.toggleInfoProduct();
   }
 
   addIngredient() {
@@ -180,6 +184,7 @@ export class CreateAEComponent implements OnInit {
       .map(res => res.json())
       .subscribe(res => {
         this.products.push(res);
+        this.toggleCreateProduct();
       });
   }
 
@@ -237,6 +242,7 @@ export class CreateAEComponent implements OnInit {
       .subscribe(res => {
         this.searchEffectString = "";
         this.effects.push(res);
+        this.toggleCreateEffect();
       });
   }
 
@@ -282,5 +288,17 @@ export class CreateAEComponent implements OnInit {
     if (this.searchEffectString.length > 0) {
       this.searchEffects();
     }
+  }
+
+  toggleCreateProduct() {
+    this.createProductShow = !this.createProductShow;
+  }
+
+  toggleCreateEffect() {
+    this.createEffectShow = !this.createEffectShow;
+  }
+
+  toggleInfoProduct() {
+    this.ProductInfoShow = !this.ProductInfoShow;
   }
 }

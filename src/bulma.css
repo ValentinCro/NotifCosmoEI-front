@@ -6056,4 +6056,38 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 
+.card_new {
+  height: 100px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #00d1b2;
+  color: #FFFFFF !important;
+  font-size: 140%;
+}
+
+.card_new:hover {
+  background-color: #00d1b2;
+}
+
+.card_existing {
+  height: 100px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.8em;
+}
+
+.add-tag:after {
+  content: " | +";
+  cursor: pointer;
+}
+
+.added-tag:after {
+  content: " | x";
+  cursor: pointer;
+}
+
+.card_new .content {
+  color: #FFF;
+}
+
 /*# sourceMappingURL=bulma.css.map */

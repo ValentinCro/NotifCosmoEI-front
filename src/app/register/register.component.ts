@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   password2: string = "";
   mail: string = "";
 
+
   constructor(private http: HttpServiceService, private router: Router) {
     if (localStorage.getItem('token') != undefined) {
       this.router.navigate([""]);

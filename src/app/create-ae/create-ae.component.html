@@ -4,6 +4,9 @@
       <h1 class="title">
         Création de notification
       </h1>
+      <h2 class="subtitle">
+        Ajout de produit
+      </h2>
     </div>
   </div>
 </section>
@@ -25,7 +28,7 @@
     </div>
     <div class="columns">
       <div class="column is-2" *ngFor="let product of dataProducts">
-        <div class="card card_new">
+        <div class="card card_existing">
           <div class="card-content">
             <div class="content has-text-centered">
               <button (click)="setInfoProduct(product)" data-open="modalInfoProduct" class="button primary"><i class="fa fa-info"></i></button>
@@ -35,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class="column is-2">
+      <div class="column is-2" (click)="toggleCreateProduct()">
         <div class="card card_new">
           <div class="card-content">
             <div class="content has-text-centered">
@@ -45,20 +48,81 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Produit ajouté
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-2" *ngFor="let product of products">
+        <div class="card card_existing">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <button (click)="setInfoProduct(product)" data-open="modalInfoProduct"  class="button primary"><i class="fa fa-info"></i></button>
+              <button (click)="removeProduct(product)" class="button primary"><i class="fa fa-minus"></i></button>
+              <p>{{ product.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column" *ngIf="products.length == 0">
+        <p>Aucun produit ajouté</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero is-danger" *ngIf="products.length > 0">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Ajout d'effet indésirable
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section" *ngIf="products.length > 0">
+  <div class="container">
     <div class="columns">
       <div class="column">
         <div class="card">
-          <header class="card-header">
-            <p class="card-header-title">Produit ajouté</p>
-          </header>
           <div class="card-content">
             <div class="content">
-              <div *ngFor="let product of products" class="columns medium-2 large-2 callout card_existing">
-                <button (click)="setInfoProduct(product)" data-open="modalInfoProduct"  class="button primary"><i class="fi-info"></i></button>
-                <button (click)="removeProduct(product)" class="button primary"><i class="fi-minus"></i></button>
-                <p>{{ product.name }}</p>
-              </div>
-              <p *ngIf="products.length == 0">Aucun produit ajouté</p>
+              <label class="label">
+                Rechercher un effet indésirable
+              </label>
+              <p class="control">
+                <input class="input" type="text" [(ngModel)]="searchEffectString" (ngModelChange)="searchEffects()">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-2" *ngFor="let effect of dataEffects">
+        <div class="card card_existing">
+          <div class="card-content">
+            <div class="content">
+              <button (click)="addExistingEffect(effect)" class="button primary"><i class="fa fa-plus"></i></button>
+              <p>{{ effect.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-2" (click)="toggleCreateEffect()">
+        <div class="card card_new">
+          <div class="card-content">
+            <div class="content">
+              Nouvel effet
             </div>
           </div>
         </div>
@@ -67,122 +131,173 @@
   </div>
 </section>
 
-<div class="row" *ngIf="products.length > 0">
-  <div class="callout columns large-12 medium-12 small-12">
-    <label>
-      Rechercher un effet indésirable
-      <input type="text" [(ngModel)]="searchEffectString" (ngModelChange)="searchEffects()">
-    </label>
-    <div *ngFor="let effect of dataEffects" class="columns medium-2 large-2 callout card_existing">
-      <button (click)="addExistingEffect(effect)" class="button primary"><i class="fi-plus"></i></button>
-      <p>{{ effect.description }}</p>
+<section class="hero is-danger" *ngIf="products.length > 0">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Effet indésirable ajouté
+      </h1>
     </div>
-    <div data-open="addEffect" class="columns medium-2 large-2 callout card_new">Nouvel effet</div>
   </div>
-</div>
-
-<div class="row" *ngIf="products.length > 0">
-  <div class="callout columns large-12 medium-12 small-12">
-    <h3>Effet ajouté</h3>
-    <div *ngFor="let effect of effects" class="columns medium-2 large-2 callout card_existing">
-      <button (click)="removeEffect(effect)" class="button primary"><i class="fi-minus"></i></button>
-      <p>{{ effect.description }}</p>
-    </div>
-    <p *ngIf="effects.length == 0">Aucun effet ajouté</p>
-  </div>
-</div>
-
-<div class="row" *ngIf="effects.length > 0 && products.length > 0">
-  <div class="callout columns large-12 medium-12 small-12">
-    <div class="row">
-      <div class="columns large-3 medium-3">
-        <label>
-          Choisissez votre code département
-          <select [(ngModel)]="code">
-            <option *ngFor="let c of regionsCode">{{ c.code }}</option>
-          </select>
-        </label>
+</section>
+<section class="section" *ngIf="products.length > 0">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-2" *ngFor="let effect of effects">
+        <div class="card">
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <button (click)="removeEffect(effect)" class="button primary"><i class="fa fa-minus"></i></button>
+              <p>{{ effect.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column" *ngIf="effects.length == 0">
+        <p>Aucun effet ajouté</p>
       </div>
     </div>
+
+    <div class="columns" *ngIf="effects.length > 0 && products.length > 0">
+      <div class="colum is-3">
+        <label class="label">
+          Choisissez votre code département
+        </label>
+        <p class="control">
+          <span class="select">
+            <select [(ngModel)]="code">
+              <option *ngFor="let c of regionsCode">{{ c.code }}</option>
+            </select>
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="columns" *ngIf="effects.length > 0 && products.length > 0">
+      <button class="button is-primary" (click)="saveNotif()">Terminez</button>
+    </div>
+  </div>
+</section>
+
+<div class="modal" [ngClass]="{ 'is-active' : createEffectShow == true }">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Nouvel effet indésirable</p>
+      <button class="delete" (click)="toggleCreateEffect()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="columns">
+        <div class="column">
+          <label class="label">
+            Description
+          </label>
+          <textarea class="textarea" [(ngModel)]="searchEffectString"></textarea>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-primary" type="button" (click)="addEffect()" [disabled]="searchEffectString.length == 0">
+        Validez
+      </button>
+    </footer>
   </div>
 </div>
 
-<div class="row" *ngIf="effects.length > 0 && products.length > 0">
-  <button class="button primary" (click)="saveNotif()">Terminez</button>
-</div>
-
-<div class="reveal" id="addEffect" data-reveal>
-  <h1>Nouvel effet</h1>
-  <div class="row">
-    <label>
-      Description
-      <textarea [(ngModel)]="searchEffectString"></textarea>
-    </label>
-  </div>
-
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div class="row">
-    <button class="button primary" data-close type="button" (click)="addEffect()" [disabled]="searchEffectString.length == 0">
-      Validez
-    </button>
-  </div>
-</div>
-
-<div class="tiny reveal" id="modalInfoProduct" data-reveal>
-  <h1>{{ infoProduct.name }}</h1>
-  <h4>Liste des ingrédients :</h4>
-  <ol>
-    <li *ngFor="let ingredient of infoProduct.ingredients">{{ ingredient.name }}</li>
-  </ol>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div class="row">
-    <button class="button primary" data-close type="button">
-      Fermer
-    </button>
+<div class="modal" [ngClass]="{ 'is-active' : ProductInfoShow == true }">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Info du produit</p>
+      <button class="delete" (click)="toggleInfoProduct()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="columns">
+        <div class="column">
+          <strong>Nom du produit : </strong>{{ infoProduct.name }}
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <strong>Liste des ingrédients :</strong>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <span class="tag" *ngFor="let ingredient of infoProduct.ingredients">{{ ingredient.name }}</span>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
 
-<div class="reveal" id="exampleModal1" data-reveal>
-  <h1>Nouveau produit</h1>
-  <div class="row">
-    <label>
-      Nom du produit
-      <input type="text" [(ngModel)]="searchString">
-    </label>
-  </div>
-  <div class="row">
-    <label>
-      Nom de l'ingrédient
-      <input type="text" [(ngModel)]="searchIngredient" (keyup.enter)="addIngredient()" (ngModelChange)="searchIngredients()">
-    </label>
-    <small *ngIf="this.searchIngredient.length > 0">Appuyez sur entrer si vous ne voyez pas l'ingrédient voulu dans la liste proposée</small>
-    <small *ngIf="this.ingredients.length == 0">Vous devez ajouter au moins un ingrédient</small>
-  </div>
-
-  <div class="row">
-    <p *ngIf="dataIngredients.length > 0"><small>Nouvel ingrédient : (cliquez pour ajouter l'ingrédient)</small>
-      <span class="label add-tag tag" *ngFor="let ingredient of dataIngredients" (click)="addExistingIngredient(ingredient)">
-        {{ ingredient.name }}
-      </span>
-    </p>
-  </div>
-  <div class="row">
-    <p *ngIf="ingredients.length > 0" ><small>Ingrédient ajouté : (cliquez pour supprimer l'ingrédient)</small>
-      <span class="label added-tag tag" *ngFor="let ingredient of ingredients" (click)="removeIngredient(ingredient)">
-        {{ ingredient.name }}
-      </span>
-    </p>
-  </div>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <div class="row">
-    <button class="button primary" data-close type="button" (click)="addProduct()" [disabled]="ingredients.length == 0">
-      Validez
-    </button>
+<div class="modal" [ngClass]="{'is-active': createProductShow == true}">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Nouveau produit</p>
+      <button class="delete" (click)="toggleCreateProduct()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="columns">
+        <div class="column">
+          <label class="label">
+            Nom du produit
+          </label>
+          <p class="control">
+            <input class="input" type="text" [(ngModel)]="searchString">
+          </p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <label class="label">
+            Nom de l'ingrédient
+          </label>
+          <p class="control">
+            <input class="input" type="text" [(ngModel)]="searchIngredient" (keyup.enter)="addIngredient()" (ngModelChange)="searchIngredients()">
+          </p>
+        </div>
+      </div>
+      <div class="columns" *ngIf="this.searchIngredient.length > 0">
+        <div class="column">
+          <small>Appuyez sur entrer si vous ne voyez pas l'ingrédient voulu dans la liste proposée</small>
+        </div>
+      </div>
+      <div class="columns" *ngIf="this.ingredients.length == 0">
+        <div class="column">
+          <small>Vous devez ajouter au moins un ingrédient</small>
+        </div>
+      </div>
+      <div class="columns" *ngIf="dataIngredients.length > 0">
+        <div class="column">
+          <small>Nouvel ingrédient : (cliquez pour ajouter l'ingrédient)</small>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <span class="add-tag tag" *ngFor="let ingredient of dataIngredients" (click)="addExistingIngredient(ingredient)">
+            {{ ingredient.name }}
+          </span>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <small *ngIf="ingredients.length > 0">Ingrédient ajouté : (cliquez pour supprimer l'ingrédient)</small>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <span class="added-tag tag" *ngFor="let ingredient of ingredients" (click)="removeIngredient(ingredient)">
+            {{ ingredient.name }}
+          </span>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-primary" type="button" (click)="addProduct()" [disabled]="ingredients.length == 0">
+        Validez
+      </button>
+    </footer>
   </div>
 </div>
