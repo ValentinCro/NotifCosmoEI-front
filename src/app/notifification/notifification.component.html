@@ -1,13 +1,31 @@
-<h2>Notification</h2>
-<div class="row">
-  <div class="callout">
-      <h4>Liste des produits : </h4>
-      <ol>
-        <li *ngFor="let product of products"><a [routerLink]="['/product', product.id]"> {{ product.name }} </a></li>
-      </ol>
-    <h4>Liste des effets : </h4>
-    <ol>
-      <li *ngFor="let effect of effects"> {{ effect.description }} </li>
-    </ol>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Détail de la notification
+      </h1>
+    </div>
   </div>
-</div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <p><strong>Liste des produits : </strong></p>
+              <ol>
+                <li *ngFor="let product of products"><a [routerLink]="['/product', product.id]"> {{ product.name }} </a></li>
+              </ol>
+              <p><strong>Liste des effets : </strong></p>
+              <ol>
+                <li *ngFor="let effect of effects"> {{ effect.description }} </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

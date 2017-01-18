@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { HttpServiceService } from '../http-service.service'
+import { TranslateLevelService } from '../translate-level.service'
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { HttpServiceService } from '../http-service.service'
 export class HomeComponent implements OnInit {
   mostReportedEffects : any = [];
   heaviestEffects : any = [];
-  constructor(private http: HttpServiceService) {
+  constructor(private http: HttpServiceService, private translate : TranslateLevelService) {
     this.getMostReportedEffects();
     this.getHeaviestEffects();
   }
@@ -18,7 +19,10 @@ export class HomeComponent implements OnInit {
     this.http.getMostReportedEffect()
       .map(res => res.json())
       .subscribe(res => {
-        this.mostReportedEffects = res;
+        for (let effect of res) {
+          effect.level = this.translate.translateLevel(effect.level);
+          this.mostReportedEffects.push(effect);
+        }
       });
   }
 
@@ -26,7 +30,10 @@ export class HomeComponent implements OnInit {
     this.http.getHeaviestEffect()
       .map(res => res.json())
       .subscribe(res => {
-        this.heaviestEffects = res;
+        for (let effect of res) {
+          effect.level = this.translate.translateLevel(effect.level);
+          this.heaviestEffects.push(effect);
+        }
       });
   }
 

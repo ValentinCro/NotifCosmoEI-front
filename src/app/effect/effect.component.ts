@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../http-service.service'
 import { ActivatedRoute, Router } from "@angular/router"
+import { TranslateLevelService } from '../translate-level.service'
 
 @Component({
   selector: 'app-effect',
@@ -9,7 +10,8 @@ import { ActivatedRoute, Router } from "@angular/router"
 })
 export class EffectComponent implements OnInit {
 
-  constructor(private http : HttpServiceService,  private route: ActivatedRoute, private router: Router) { }
+  constructor(private http : HttpServiceService,  private route: ActivatedRoute, private router: Router,
+              private translate : TranslateLevelService) { }
   effect : any = {};
   ngOnInit() {
 
@@ -19,6 +21,7 @@ export class EffectComponent implements OnInit {
         .map(res => res.json())
         .subscribe(res => {
           this.effect = res;
+          this.effect.level = this.translate.translateLevel(this.effect.level);
         },
         error => {
           if (error.status == 404) {

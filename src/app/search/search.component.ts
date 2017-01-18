@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../http-service.service';
+import { TranslateLevelService } from '../translate-level.service'
 
 @Component({
   selector: 'app-search',
@@ -13,7 +14,7 @@ export class SearchComponent implements OnInit {
   criteria: string = "product";
   searchString : string = "";
 
-  constructor(private http : HttpServiceService) { }
+  constructor(private http : HttpServiceService, private translate : TranslateLevelService) { }
 
   ngOnInit() {
   }
@@ -48,7 +49,10 @@ export class SearchComponent implements OnInit {
     this.http.searchEffects(this.searchString)
       .map(res => res.json())
       .subscribe(res => {
-        this.effects = res;
+        for (let effect of res) {
+          effect.level = this.translate.translateLevel(effect.level);
+          this.effects.push(effect);
+        }
       });
   }
 }

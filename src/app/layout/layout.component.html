@@ -3,10 +3,10 @@
     <a class="nav-item" routerLink="/">
       Cosmos EI
     </a>
-    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/newAE">+ Notification</a>
-    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/newProduct">+ Produit</a>
-    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/newEffect">+ Effet Indésirable</a>
-    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/newIngredient">+ Ingrédient</a>
+    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/new/notification">+ Notification</a>
+    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/new/product">+ Produit</a>
+    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/new/effect">+ Effet Indésirable</a>
+    <a class="nav-item" *ngIf="isConnected()" href="" routerLink="/new/ingredient">+ Ingrédient</a>
   </div>
 
   <div class="nav-center">
@@ -28,7 +28,7 @@
       <a href="" routerLink="/register" class="button secondary">S'inscrire</a>
       <a href="" routerLink="/log" type="button" class="button">Se connecter</a>
     </span>
-    <a *ngIf="isConnected()" class="nav-item" href="" routerLink="/myNotification">Mes notifications </a>
+    <a *ngIf="isConnected()" class="nav-item" href="" routerLink="/myself/notification">Mes notifications </a>
 
     <span class="nav-item" *ngIf="isConnected()">
       <a href="" routerLink="/search" class="button"><i class="fa fa-search"></i></a>

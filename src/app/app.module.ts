@@ -14,6 +14,8 @@ import { CreateAEComponent } from './create-ae/create-ae.component';
 import { SearchComponent } from './search/search.component';
 
 import { HttpServiceService } from './http-service.service';
+import { TranslateLevelService } from './translate-level.service';
+
 import { NotifificationComponent } from './notifification/notifification.component';
 import { ProductComponent } from './product/product.component';
 import { MyNotificationComponent } from './my-notification/my-notification.component';
@@ -50,7 +52,8 @@ import { CreateIngredientComponent } from './create-ingredient/create-ingredient
     RouterModule.forRoot(ROUTES)
   ],
   providers: [
-    HttpServiceService
+    HttpServiceService,
+    TranslateLevelService
   ],
   bootstrap: [AppComponent]
 })

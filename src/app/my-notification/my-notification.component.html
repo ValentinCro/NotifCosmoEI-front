@@ -1,3 +1,33 @@
-<p>
-  my-notification works!
-</p>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Mes notifications
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-2">
+        <p *ngIf="notifications.length == 0">Vous n'avez aucune notifications</p>
+        <div class="card" *ngFor="let notification of notifications">
+          <div class="card-content">
+            <div class="content">
+              <p><strong>Liste des produits : </strong></p>
+              <ol>
+                <li *ngFor="let product of notification.products"><a [routerLink]="['/product', product.id]"> {{ product.name }} </a></li>
+              </ol>
+              <p><strong>Liste des effets : </strong></p>
+              <ol>
+                <li *ngFor="let effect of notification.effects"> {{ effect.description }} </li>
+              </ol>
+              <button class="button is-primary" [routerLink]="['/new/notification', notification.id]">Modifier</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

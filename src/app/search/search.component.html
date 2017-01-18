@@ -1,72 +1,126 @@
-<div class="row">
-  <h3>Recherche</h3>
-  <div class="columns large-12 medium-12 small-12">
-    <div class="input-group">
-      <input class="input-group-field" type="text" [(ngModel)]="searchString" (keyup.enter)="search()">
-      <div class="input-group-button">
-        <button class="button" (click)="search()"><i class="fi-magnifying-glass"></i></button>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Recherche
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <div class="columns">
+                <div class="column">
+                  <div class="control is-grouped">
+                    <p class="control is-expanded">
+                      <input class="input" type="text" [(ngModel)]="searchString" (keyup.enter)="search()">
+                    </p>
+                    <p class="control">
+                      <a class="button is-primary" (click)="search()">
+                        <i class="fa fa-info"></i>
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <p>Critére de recherche</p>
+                  <p class="control">
+                    <label class="radio">
+                      <input type="radio" name="criteria" [(ngModel)]="criteria" value="product" id="product">
+                      Produit
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="criteria" [(ngModel)]="criteria" value="ingredient" id="ingredient">
+                      Ingrédient
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="criteria" [(ngModel)]="criteria" value="effect" id="effect">
+                      Effet
+                    </label>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="callout">
-      <fieldset>
-        <legend>Critére de recherche</legend>
-        <input type="radio" name="criteria" [(ngModel)]="criteria" value="product" id="product" required><label for="product">Produit</label>
-        <input type="radio" name="criteria" [(ngModel)]="criteria" value="ingredient" id="ingredient"><label for="ingredient">Ingrédient</label>
-        <input type="radio" name="criteria" [(ngModel)]="criteria" value="effect" id="effect"><label for="effect">Effet</label>
-      </fieldset>
+    <div class="columns" *ngIf="criteria == 'effect'">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th width="150">Nb. notification</th>
+                  <th>Description</th>
+                  <th>Niveau</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let effect of effects">
+                  <td><span class="tag is-primary">{{ effect.nbNotifications }}</span></td>
+                  <td>{{ effect.description }}</td>
+                  <td>{{ effect.level }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <small><a *ngIf="advancedSearch == false" (click)="displayAdvancedSearch()">recherche avancée</a></small>
-  </div>
-  <div class="columns large-12 medium-12 small-12" *ngIf="criteria == 'effect'">
-    <div class="callout">
-      <table class="hover hide-for-small-only">
-        <thead>
-          <tr>
-            <th width="150">Nb. notification</th>
-            <th>Description</th>
-            <th>Niveau</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let effect of effects">
-            <td><span class="badge">{{ effect.nbNotifications }}</span></td>
-            <td>{{ effect.description }}</td>
-            <td>{{ effect.level }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="columns" *ngIf="criteria == 'product'">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Nom</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let product of products">
+                  <td><a [routerLink]="['/product', product.id]">{{ product.name }}</a></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns" *ngIf="criteria == 'ingredient'">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Nom</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let ingredient of ingredients">
+                  <td>{{ ingredient.name }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="columns large-12 medium-12 small-12" *ngIf="criteria == 'product'">
-    <div class="callout">
-      <table class="hover hide-for-small-only">
-        <thead>
-        <tr>
-          <th>Nom</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let product of products">
-          <td><a [routerLink]="['/product', product.id]">{{ product.name }}</a></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="columns large-12 medium-12 small-12" *ngIf="criteria == 'ingredient'">
-    <div class="callout">
-      <table class="hover hide-for-small-only">
-        <thead>
-        <tr>
-          <th>Nom</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let ingredient of ingredients">
-          <td>{{ ingredient.name }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+</section>

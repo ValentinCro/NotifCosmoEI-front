@@ -1,14 +1,32 @@
-<h2>Détail de l'effet indésirable</h2>
-<div class="row">
-  <div class="callout columns large-12 medium-12 small-12">
-    <p>
-      <strong>Description : </strong> {{ effect.description }}
-    </p>
-    <p>
-      <strong>Nombre de notification : </strong> {{ effect.nbNotifications }}
-    </p>
-    <p>
-      <strong>Niveau : </strong> {{ effect.level }}
-    </p>
+<section class="hero is-danger">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Détail de l'effet indésirable
+      </h1>
+    </div>
   </div>
-</div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <p>
+                <strong>Description : </strong> {{ effect.description }}
+              </p>
+              <p>
+                <strong>Nombre de notification : </strong> {{ effect.nbNotifications }}
+              </p>
+              <p>
+                <strong>Niveau : </strong> {{ effect.level }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

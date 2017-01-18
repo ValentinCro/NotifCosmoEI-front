@@ -90,8 +90,14 @@ export class HttpServiceService {
     return this.http.get(this.baseUrl + '/effects/heaviest');
   }
 
+  getMyNotifications() {
+    let header = this.generateHeader();
+    return this.http.get(this.baseUrl + '/notifications/myself', header);
+  }
+
   updateNotification(body) {
-    return this.http.put(this.baseUrl + '/notifications', body);
+    let header = this.generateHeader();
+    return this.http.put(this.baseUrl + '/notifications', body, header);
   }
 
   signup(body) {

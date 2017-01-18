@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="columns">
-      <button class="button primary" data-close type="button is-primary" (click)="addIngredient()">
+      <button class="button is-primary" data-close type="button" (click)="addIngredient()" [disabled]="name.length == 0">
         Validez
       </button>
     </div>
