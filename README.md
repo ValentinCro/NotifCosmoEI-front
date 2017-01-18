@@ -21,7 +21,7 @@ déployer le back et le front sur deux serveurs distincts.
 
 ## Etape 3, lancer le serveur
 
-Pour tester le front vous pouvez executer la commande `ng serve` pour lancer un serveur de dev. Navigué jusqu'à `http://localhost:4200/`. L'application va automatiquement se recharger si les sources sont modifiées.
+Pour tester le front vous pouvez executer la commande `ng serve` pour lancer un serveur de dev. Naviguez jusqu'à `http://localhost:4200/`. L'application va automatiquement se recharger si les sources sont modifiées.
 
 # Technologies
 
@@ -35,14 +35,14 @@ Pour le front nous avons utilisé deux technologies :
 ## Authentification
 
 Il est possible de s'inscrire, il faut alors renseigner une adresse mail, un nom d'utilisateur, un prénom, un nom et un mot de passe. 
-Le front reçois alors le token de l'utilisateur qui est alors stocké dans le LocalStorage. L'utilisateur reste connecté tant que 
+Le front reçoit alors le token de l'utilisateur qui est alors stocké dans le LocalStorage. L'utilisateur reste connecté tant que 
 le LocalStorage n'est pas supprimé où qu'il est volontairement utilisé la Fonctionnalité de déconnexion. Une fois inscrit l'utilisateur peut 
 s'inscrire en renseignant son nom d'utilisateur et son mot de passe.
 
 ## Création
 
 Pour la création l'utilisateur doit être authentifié. Pour les produits, les ingrédients et les effets indésirables il est impossible
-de créé deux fois la même entité
+de créer deux fois la même entité.
 
 ### Notification
 
@@ -53,28 +53,28 @@ Une fois la notification créée l'utilisateur est redirigé vers la page de dé
 
 ### Produit
 
-Il est possible de créer un produits de A à Z. On peut alors rechercher les ingrédients existant ou de les créer. Lorsque
+Il est possible de créer un produit de A à Z. On peut alors rechercher les ingrédients existant ou de les créer. Lorsque
 le produit est créé l'utilisateur est alors redirigé vers la page de détail du produit.
 
 ### ingrédient
 
 Il est possible de créer un ingrédient. Lorsque l'ingrédient est créé l'utilisateur est alors redirigé vers la page de détail de l'ingrédient.
 
-### Effets indésirable
+### Effets indésirables
 
 Il est possible de créer un effet indésirable. Lorsque l'effet indésirable est créé l'utilisateur est alors redirigé vers la page de détail de l'effet indésirable.
 
 ## Recherche
 
 Une page de recherche permet à l'utilisateur de faire une recherche parmis les produits, les ingrédients et les effets indésirables.
-Via les produit il est possible d'accéder à la page de détail du produit et d'y voir alors les ingrédients que composent ce produit.
+Via les produits il est possible d'accéder à la page de détail du produit et d'y voir alors les ingrédients que composent ce produit.
 
 ## Lecture
 
-Chaque entité peut être consulté via une page détaillant l'entité. A l'adresse /entité/{id de l'entité}. Si l'id de l'entité n'existe pas
+Chaque entité peut être consultée via une page détaillant l'entité. A l'adresse /entité/{id de l'entité}. Si l'id de l'entité n'existe pas
 l'utilisateur est redirigé vers une page 404.
 
 ## Accueil
 
-Sur l'accueil est affiché deux tableaux. L'un affichant les effets secondaire les plus reportés l'autre affichant les effets indésirables 
-les plus lourd (en poid) cf partie back du rapport.
+Sur l'accueil est affiché deux tableaux. L'un affichant les effets secondaires les plus reportés l'autre affichant les effets indésirables 
+les plus lourds (en poid) cf partie back du rapport.
