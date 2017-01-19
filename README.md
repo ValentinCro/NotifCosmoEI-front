@@ -22,7 +22,7 @@ déployer le back et le front sur deux serveurs distincts.
 ## Etape 3, lancer le serveur
 
 Pour tester le front vous pouvez executer la commande `ng serve` pour lancer un serveur de dev. Naviguez jusqu'à `http://localhost:4200/`. L'application va automatiquement se recharger si les sources sont modifiées.
-
+Il est aussi possible de build le projet avec `ng build`, le contenu du build se trouve alors dans le dossier dist.
 # Technologies
 
 Pour le front nous avons utilisé deux technologies :
