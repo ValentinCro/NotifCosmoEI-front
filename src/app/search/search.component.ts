@@ -13,10 +13,29 @@ export class SearchComponent implements OnInit {
   ingredients : any = [];
   criteria: string = "product";
   searchString : string = "";
+  page : number;
 
   constructor(private http : HttpServiceService, private translate : TranslateLevelService) { }
 
   ngOnInit() {
+    this.http.getAllProducts()
+
+      .subscribe(res => {
+        this.products = res.json();
+      });
+    this.http.getAllEffects()
+
+      .subscribe(res => {
+        for (let effect of res.json()) {
+          effect.level = this.translate.translateLevel(effect.level);
+          this.effects.push(effect);
+        }
+      });
+    this.http.getAllIngredients()
+
+      .subscribe(res => {
+        this.ingredients = res.json();
+      });
   }
 
   search() {

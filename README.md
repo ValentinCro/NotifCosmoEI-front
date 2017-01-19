@@ -78,3 +78,10 @@ l'utilisateur est redirigé vers une page 404.
 
 Sur l'accueil est affiché deux tableaux. L'un affichant les effets secondaires les plus reportés l'autre affichant les effets indésirables 
 les plus lourds (en poid) cf partie back du rapport.
+
+## Captures d'écrans
+
+![accueil](accueil.png)
+![all effect](all_effect.png)
+![create effect](create_effect.png)
+![detail ingredient](detail_ingredient.png)
